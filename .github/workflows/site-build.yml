@@ -1,0 +1,39 @@
+name: Validate site build
+
+on:
+  pull_request:
+    paths:
+      - "docs/**/*.md"
+      - "docs/**/*.yml"
+      - "docs/**/*.yaml"
+      - "docs/**/*.js"
+      - "docs/**/*.css"
+      - "mkdocs.yml"
+      - "requirements.txt"
+      - ".github/workflows/site-build.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: site-build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build site
+        run: mkdocs build --strict

@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.md'
+      - '**/*.txt'
+      - '.github/workflows/release.yml'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+      - name: GitHub Deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+            token: $${{ secrets.GH_TOKEN }}
+            environment: production
+      - name: Release
+        uses: cycjimmy/semantic-release-action@v6
+        with:
+          semantic_version: 18.0.0
+          extra_plugins: |
+            @semantic-release/changelog@6.0.0
+            @semantic-release/git@10.0.0
+            conventional-changelog-conventionalcommits@4.6.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '$${{ github.token }}'
+          environment-url: $${{ steps.deployment.outputs.environment_url }}
+          deployment-id: $${{ steps.deployment.outputs.deployment_id }}
+          state: 'success'
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '$${{ github.token }}'
+          environment-url: $${{ steps.deployment.outputs.environment_url }}
+          deployment-id: $${{ steps.deployment.outputs.deployment_id }}
+          state: 'failure'
