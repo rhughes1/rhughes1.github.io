@@ -1,0 +1,196 @@
+site_name: rhughes1
+site_url: https://rhughes1.github.io
+site_description: Platform engineering, cloud architecture, and DevOps consulting by rhughes1.
+site_author: rhughes1
+repo_url: https://github.com/rhughes1/rhughes1.github.io
+repo_name: rhughes1/rhughes1.github.io
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      post_date_format: long
+      post_url_format: "{date}/{slug}"
+      post_excerpt: required
+      post_excerpt_separator: <!-- more -->
+      categories: true
+      archive: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: simple/jira
+      link: https://rhughes1.atlassian.net/
+      name: Jira Cloud
+    - icon: simple/terraform
+      link: https://app.terraform.io/app/rhughes1/
+      name: HCP Terraform
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/ryan-hughes-csm-0601453b/
+    - icon: fontawesome/brands/github
+      link: https://github.com/rhughes1
+  analytics:
+    provider: google
+    property: !ENV [GOOGLE_ANALYTICS_KEY, ""]
+
+extra_css:
+  - overrides/os-selector.css
+  - overrides/homepage.css
+  - overrides/blog.css
+
+extra_javascript:
+  - overrides/os-selector.js
+
+nav:
+  - Home: index.md
+  - Developer Setup:
+      - developer-setup/index.md
+      - Prerequisites:
+          - Overview: developer-setup/prerequisites/index.md
+          - Core & Version Control:
+              - Git: developer-setup/prerequisites/git.md
+              - SSH & GitHub: developer-setup/prerequisites/ssh.md
+              - pre-commit: developer-setup/prerequisites/pre-commit.md
+          - Cloud CLIs:
+              - AWS CLI: developer-setup/prerequisites/aws-cli.md
+              - Azure CLI: developer-setup/prerequisites/azure-cli.md
+          - HashiCorp Suite:
+              - Terraform: developer-setup/prerequisites/terraform.md
+              - tflint: developer-setup/prerequisites/tflint.md
+              - tfsec: developer-setup/prerequisites/tfsec.md
+              - Vault: developer-setup/prerequisites/vault.md
+              - Packer: developer-setup/prerequisites/packer.md
+              - Consul: developer-setup/prerequisites/consul.md
+              - Sentinel: developer-setup/prerequisites/sentinel.md
+          - Configuration Management:
+              - Ansible: developer-setup/prerequisites/ansible.md
+              - Chef: developer-setup/prerequisites/chef.md
+          - Containers & Orchestration:
+              - Docker: developer-setup/prerequisites/docker.md
+              - Docker Compose: developer-setup/prerequisites/docker-compose.md
+              - kubectl: developer-setup/prerequisites/kubectl.md
+          - Languages:
+              - Python: developer-setup/prerequisites/python.md
+              - Go: developer-setup/prerequisites/go.md
+              - Ruby: developer-setup/prerequisites/ruby.md
+              - Java: developer-setup/prerequisites/java.md
+          - IDE & Extensions:
+              - VSCode: developer-setup/prerequisites/vscode.md
+          - Pipeline Testing:
+              - act: developer-setup/prerequisites/act.md
+  - Principles:
+      - principles/index.md
+      - "1 · Prioritize Security": principles/01-security.md
+      - "2 · Fail Fast": principles/02-fail-fast.md
+      - "3 · Testing": principles/03-testing.md
+      - "4 · Repeatability & Portability": principles/04-repeatability.md
+      - "5 · No Object Left Unmanaged": principles/05-no-object-unmanaged.md
+      - "6 · Readable Code": principles/06-readable-code.md
+      - "7 · Agnostic": principles/07-agnostic.md
+      - "8 · Observability": principles/08-observability.md
+      - "9 · Metrics": principles/09-metrics.md
+      - "10 · Teamwork": principles/10-teamwork.md
+  - Engineering Standards:
+      - standards/index.md
+      - Terraform:
+          - Overview: standards/terraform/index.md
+          - OpenSpec:
+              - Overview: standards/terraform/openspec.md
+              - Repo conventions: standards/terraform/openspec/repo-conventions.md
+          - Modules: standards/terraform/modules.md
+          - Module creation workflow: standards/terraform/module-creation-workflow.md
+          - Module naming conventions: standards/terraform/module-naming-conventions.md
+          - Taxonomy: standards/terraform/taxonomy.md
+          - Declarative and object-oriented design: standards/terraform/declarative-oob.md
+          - Remote state: standards/terraform/remote-state.md
+          - TDD / BDD: standards/terraform/tdd-bdd.md
+          - Testing: standards/terraform/testing.md
+      - Packer: standards/packer.md
+      - Ansible: standards/ansible.md
+      - Go: standards/go.md
+
+  - Contributing & Releases:
+      - Overview: contributing-releases/index.md
+      - Contribution workflow: contributing-releases/contribution-workflow.md
+      - Reporting an issue: contributing-releases/reporting-a-issue.md
+      - Work items: contributing-releases/jira-work-items.md
+      - Pull request template: contributing-releases/pull-request-template.md
+      - Release workflow: contributing-releases/release-workflow.md
+      - Versioning: contributing-releases/versioning/index.md
+  - Infrastructure:
+      - infrastructure/index.md
+      - Corporate Metadata, Naming, and Tagging Standard: infrastructure/architecture/aws/strategies/tagging.md
+  - Tutorials:
+      - tutorials/index.md
+      - New Terraform Module: tutorials/new-terraform-module.md
+      - Vault Local Development: tutorials/vault-local.md
+      - Consul Local Development: tutorials/consul-local.md
+      - New Ansible Playbook Repository: tutorials/new-ansible-playbook.md
+      - New Chef Cookbook Repository: tutorials/new-chef-cookbook.md
+      - Vault & Consul Local Stack: tutorials/vault-consul-local.md
+      - New Product: tutorials/new-product.md
+  - Blog:
+      - blog/index.md

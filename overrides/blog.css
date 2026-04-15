@@ -1,0 +1,22 @@
+.md-post--excerpt {
+  margin-bottom: 1rem;
+}
+
+.md-post--excerpt .md-post__header,
+.md-post--excerpt .md-post__content > :not(h2) {
+  display: none;
+}
+
+.md-post--excerpt .md-post__content > h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.md-post--excerpt .md-post__content > h2 a {
+  text-decoration: none;
+}
+
+.md-post--excerpt .md-post__content > h2 a:hover {
+  text-decoration: underline;
+}
