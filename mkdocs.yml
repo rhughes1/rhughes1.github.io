@@ -92,9 +92,6 @@ extra:
       link: https://www.linkedin.com/in/ryan-hughes-csm-0601453b/
     - icon: fontawesome/brands/github
       link: https://github.com/rhughes1
-  analytics:
-    provider: google
-    property: !ENV [GOOGLE_ANALYTICS_KEY, ""]
 
 extra_css:
   - overrides/os-selector.css
