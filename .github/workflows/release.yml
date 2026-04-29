@@ -10,7 +10,7 @@ on:
       - '**/*.txt'
       - '.github/workflows/release.yml'
       - '.github/workflows/deploy.yml'
-
+      - 'mkdocs.yml'
 jobs:
   release:
     name: Release
