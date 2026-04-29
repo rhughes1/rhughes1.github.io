@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0](https://github.com/rhughes1/rhughes1.github.io/compare/v1.0.0...v1.1.0) (2026-04-29)
+
+
+### Features
+
+* Adding post about new GitHub Terraform modules and TFE Workspace module ([a3740da](https://github.com/rhughes1/rhughes1.github.io/commit/a3740da2943be25879056bc89fb47e885a6a7272))
+
 ## 1.0.0 (2026-04-15)
 
 
