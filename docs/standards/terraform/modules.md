@@ -3,11 +3,11 @@ title: Modules Best Practices
 description: Best practices for creating and using Terraform modules in your infrastructure as code projects.
 ---
 
-In the typical argument for development, when do you create `monolithic code` versus `modular code`? 
+In the typical argument for development, when do you create `monolithic code` versus `modular code`?
 
 The answer is simple:
 
-__<<<< ALWAYS USE MODULES >>>>__ when writing terraform. Modules allow you to encapsulate functionality, making your code reusable and easier to maintain.
+Prefer modules when you are building reusable Terraform code. Modules allow you to encapsulate functionality, making code reusable and easier to maintain without forcing every repository to be a module-first architecture.
 
 ## Naming Conventions
 
@@ -78,7 +78,7 @@ This method is useful when you have a specific use case in mind, and you want to
 2. If the root module is specifically designed for a `single team`, then the default variables are `coded for the team's development requirements`.
 3. The Default Variables should be asessed and resolve `input validation` to make sure users know what values they can use to override the defaults.
 4. The module should handle all of the `data structures (interpolated via locals)`	that are required to implement the features, and should not rely on the user to provide any data structures.
-5. `Testing` should be done on the `root module directly (no examples)`, and should be designed to validate the functionality of the module as a whole, rather than individual features or components. 
+5. `Testing` should usually be done with native Terraform tests that exercise example configurations, especially `examples/default/`, and should validate the module as a whole rather than isolated implementation details.
 6. All `provider credentials should be dynamically generated where possible`, and handled by the environment, not the code (data sources, variables, locals, etc.).
 7. `Data sources` should be used where possible to retrieve information about the environment, `rather than hardcoding values` in the module.
 8. `Leverage metadata modules` as much as possible, to guarantee data is properly available and to reduce the amount of code that needs to be written.
@@ -162,6 +162,8 @@ A Terraform module repository should expose the module itself at the repository 
 - `.pre-commit-config.yaml` enforces formatting, validation, and documentation generation
 
 Examples should not rely on live provider resources unless the example is explicitly for integration testing. Prefer mock data and local execution paths so examples can support both documentation and testing.
+
+For generated scaffolds, prefer `examples/default/` and `tests/default.tftest.hcl` as the baseline layout. Treat Terratest as an opt-in exception path rather than the default validation mechanism.
 
 ### __Module Structure__
 

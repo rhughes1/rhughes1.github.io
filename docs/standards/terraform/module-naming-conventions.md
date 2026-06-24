@@ -55,6 +55,16 @@ The modules will be loaded through the [Terraform Cloud registry](https://app.te
 - `terraform-vault-auth-aws`	
 - `terraform-vault-secrets-aws`	
 
+## Provider-Neutral Scaffolds
+
+When a repository is serving as a generic module scaffold or management layer, keep the template naming provider-neutral even if the rendered repositories will be provider-specific.
+
+### Examples
+
+- `terraform-module`
+- `terraform-module-mgmt`
+- `terraform-config-example-mgmt`
+
 ## Intermediate Modules
 
 Intermediate modules should follow the same naming conventions as [Modules](#modules). They should be named to reflect their purpose and the technology they manage.
