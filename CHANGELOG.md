@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/rhughes1/rhughes1.github.io/compare/v1.1.0...v1.2.0) (2026-06-25)
+
+
+### Features
+
+* Adding in standards documentation ([e523d74](https://github.com/rhughes1/rhughes1.github.io/commit/e523d74497dd0ab4eaa18955088d0d296fc7ce69))
+
 ## [1.1.0](https://github.com/rhughes1/rhughes1.github.io/compare/v1.0.0...v1.1.0) (2026-04-29)
 
 
