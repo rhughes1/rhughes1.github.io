@@ -9,6 +9,16 @@ Use Terraform's native testing framework for module validation by default.
 
 Prefer `terraform test` with example-driven tests, provider mocks, and overrides for fast, deterministic coverage. Use Terratest only when you need deeper integration or system-level validation that native Terraform tests do not express cleanly.
 
+## Default scaffold pattern
+
+For generated Terraform module scaffolds, prefer this baseline layout:
+
+- `examples/default/` for the main runnable example
+- `tests/default.tftest.hcl` for the primary native test
+- `terraform test` as the default CI validation path
+
+Keep Terratest support available only when a module truly needs a Go-based integration harness.
+
 ## Testing model
 
 Use the following order of preference:
@@ -113,6 +123,8 @@ module "resource_group" {
 }
 ```
 
+When a module is scaffolded for general reuse, prefer a generic example over provider-specific fixtures. Keep provider-specific examples only when they are needed to document a real supported use case.
+
 ## Mocking and overrides
 
 Use mocks and overrides to keep tests local, fast, and deterministic.
@@ -180,6 +192,8 @@ Terratest is appropriate when you need:
 
 Do not use Terratest as the default module test framework when native Terraform testing can validate the behavior.
 
+In scaffolded repositories, Terratest should be opt-in. The presence of Terratest support should not imply that every generated module needs Go files, a `go.mod`, or a `go.sum`.
+
 ### Terratest guidance
 
 - keep Terratest suites narrow and intentional
@@ -218,4 +232,3 @@ If a test needs live provider access, handle authentication outside the test fil
 4. Run `terraform test` locally
 5. Add Terratest only if the scenario truly needs it
 6. Validate in CI
-

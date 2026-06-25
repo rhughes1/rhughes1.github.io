@@ -152,6 +152,12 @@ nav:
       - "10 · Teamwork": principles/10-teamwork.md
   - Engineering Standards:
       - standards/index.md
+      - Application standards:
+          - Overview: standards/applications/index.md
+          - Twelve-factor applications: standards/applications/twelve-factor.md
+          - REST API standard: standards/applications/rest-api.md
+          - OpenAPI standard: standards/applications/openapi.md
+          - Service checklist: standards/applications/checklist.md
       - Terraform:
           - Overview: standards/terraform/index.md
           - OpenSpec:
@@ -167,7 +173,12 @@ nav:
           - Testing: standards/terraform/testing.md
       - Packer: standards/packer.md
       - Ansible: standards/ansible.md
-      - Go: standards/go.md
+      - Go:
+          - Overview: standards/go/index.md
+          - Coding practices: standards/go/coding-practices.md
+          - Testing: standards/go/testing.md
+          - Comments: standards/go/comments.md
+          - Checklist: standards/go/checklist.md
 
   - Contributing & Releases:
       - Overview: contributing-releases/index.md

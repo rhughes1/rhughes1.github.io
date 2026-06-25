@@ -29,7 +29,14 @@ These standards are the reusable Terraform guidance for this site. Use them when
 
 ## Related guidance
 
+- [Contribution workflow](../../contributing-releases/contribution-workflow.md)
 - [Versioning](../../contributing-releases/versioning/index.md)
+
+## Delivery model
+
+Terraform module repositories default to mainline development when maintained by one developer. Branch from `main`, validate the change, and merge back to `main` through a pull request.
+
+When multiple developers are contributing to a grouped module release, use the release branch flow from the [contribution workflow](../../contributing-releases/contribution-workflow.md). Create a temporary `release/*` branch from `main`, merge feature branches into that release branch, validate the grouped release, and merge the release branch back to `main`.
 
 ## Related tutorials
 

@@ -5,6 +5,8 @@ description: Guidelines for determining when to create a Terraform module.
 
 Below is a standard guide on determining when to make a Terraform module
 
+When the module is intended to be shared or scaffolded repeatedly, prefer a native-test-friendly structure with runnable examples and deterministic tests. Use Terratest only when a real integration boundary requires Go-based validation.
+
 ```mermaid
 graph TD;
     A[Are you writing a module for reusable code?] -->|Yes| B{Is it a small resource?};
