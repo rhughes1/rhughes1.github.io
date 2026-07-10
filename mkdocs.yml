@@ -184,7 +184,17 @@ nav:
       - Overview: contributing-releases/index.md
       - Contribution workflow: contributing-releases/contribution-workflow.md
       - Reporting an issue: contributing-releases/reporting-a-issue.md
-      - Work items: contributing-releases/jira-work-items.md
+      - Work items:
+          - Overview: contributing-releases/jira-work-items.md
+          - Feature story: contributing-releases/jira-templates/feature-story.md
+          - Bug: contributing-releases/jira-templates/bug.md
+          - Implementation subtask: contributing-releases/jira-templates/implementation-subtask.md
+          - Review subtask: contributing-releases/jira-templates/review-subtask.md
+      - Agentic delivery: contributing-releases/agentic-delivery.md
+      - Agent lanes: contributing-releases/agent-lanes.md
+      - Agent tooling: contributing-releases/agent-tooling.md
+      - Review gates: contributing-releases/review-gates.md
+      - Agent prompt library: contributing-releases/agent-prompt-library.md
       - Pull request template: contributing-releases/pull-request-template.md
       - Release workflow: contributing-releases/release-workflow.md
       - Versioning: contributing-releases/versioning/index.md

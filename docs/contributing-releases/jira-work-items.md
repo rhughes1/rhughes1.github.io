@@ -1,27 +1,61 @@
 ---
 title: Work items
-description: Standard templates for epics, stories, and bugs.
+description: Jira work item standards for cross-repository delivery and agent-routed implementation.
 ---
 
 # Work items
 
-Use this page when creating or updating work items.
+Use Jira as the intake and routing layer for planned work, bugs, implementation slices, and review gates.
 
-This page defines the standard description format for:
+This page defines the cross-repository standard. Repository-specific paths, commands, branch defaults, validation tools, and implementation conventions belong in the target repository's `AGENTS.md`, `CONTRIBUTING.md`, or local documentation.
 
-- Epics
-- Stories
-- Bugs
+## Work item types
 
-Use the matching section below when you open a work item. Keep the section order intact so the description is easy to read in Jira, Codex CLI, and OpenSpec.
+| Type | Use for | Template |
+|------|---------|----------|
+| Epic | A group of related outcomes or a larger initiative | [Epic template](#epic-template) |
+| Feature story | New behavior, platform capabilities, docs improvements, infrastructure changes, and planned work | [Feature story](jira-templates/feature-story.md) |
+| Bug | Broken, regressed, insecure, or misleading existing behavior | [Bug](jira-templates/bug.md) |
+| Implementation subtask | One implementation slice on one branch | [Implementation subtask](jira-templates/implementation-subtask.md) |
+| Review subtask | Read-only review of a PR, branch, OpenSpec change, or documentation change | [Review subtask](jira-templates/review-subtask.md) |
 
-If a Jira key exists, include it.
-If no Jira key exists, use the same structure for a GitHub issue, repository-local proposal, or direct request.
+If a Jira key exists, include it in branch names, pull request titles, and related issue links. If no Jira key exists, use the same structure for a GitHub issue, repository-local proposal, or direct request.
 
-## References
+## Agent-ready fields
 
-- [Atlassian: Epics](https://www.atlassian.com/agile/project-management/epics){ target=_blank }
-- [Atlassian: User stories](https://www.atlassian.com/agile/project-management/user-stories){ target=_blank }
+Use these fields when a work item may be implemented or reviewed by Codex, OpenCode, or another coding agent.
+
+### Required for implementation work
+
+| Field | Purpose |
+|-------|---------|
+| `Goal` | Describes the intended outcome in one clear statement. |
+| `Acceptance criteria` | Defines the observable conditions that prove the work is complete. |
+| `Scope` | Lists what the work includes. |
+| `Out of scope` | Lists what must not be changed. |
+| `OpenSpec required` | States whether a behavior contract is needed before implementation. |
+| `Implementation slices` | Splits the work into independently owned slices. |
+| `Validation` | Names the expected repository-specific checks. |
+| `Branch` | Identifies the base branch, working branch, and preferred lane when known. |
+| `Do not touch` | Protects files, modules, workflows, packages, or behavior that must stay unchanged. |
+
+These fields prevent each agent session from needing a large custom prompt. The Jira issue should contain enough routing context for an agent to find the right repository, understand the boundaries, choose the correct lane, validate the change, and hand off cleanly.
+
+## Jira as the work router
+
+Jira should answer these questions before implementation starts:
+
+- What outcome is requested?
+- What is the acceptance criteria?
+- What is in scope?
+- What is out of scope?
+- Is OpenSpec required?
+- Which implementation slices exist?
+- Which validation commands or checks are expected?
+- Which branch should own the work?
+- Which files or behavior must not be touched?
+
+When `Implementation slices` lists more than one slice, route each slice through the [agent lane model](agent-lanes.md). The operating rule is one mutating agent, one branch, one slice.
 
 ## Epic template
 
@@ -52,156 +86,67 @@ Use this format for epics:
 ```markdown
 ## Overview
 
-We need a standard way to describe and validate work items so that documentation, implementation, and review stay aligned.
+We need a standard way to describe and validate work items so documentation, implementation, and review stay aligned.
 
 ## Scope
 
 - Jira epics
 - Jira stories
 - Jira bugs
-- Supporting documentation for Codex CLI and OpenSpec
+- Implementation and review subtasks
+- Supporting documentation for coding agents and OpenSpec
 
 ## Out of Scope
 
-- Implementation details for a specific repository
+- Repository-specific validation commands
 - Release notes
-- GitHub pull request templates
+- Pull request templates
 
 ## Success Metrics
 
-- Every new work item uses a consistent description format
-- Codex CLI can infer the correct work item type from the key and headings
-- OpenSpec can use the same structure when drafting proposals
+- New work items use consistent description formats.
+- Agents can infer the work item type from headings.
+- Implementation slices can be routed without a large custom prompt.
 
 ## Resources
 
 - Contributing & Releases
-- Reporting an issue
-- Pull request template
+- Agentic delivery
+- Agent lanes
 ```
 
-## Story template
+## Template pages
 
-Use this format for stories:
+Use the individual template pages for copy/paste work:
 
-```markdown
-As a [persona], I [want to], [so that]
+- [Feature story](jira-templates/feature-story.md)
+- [Bug](jira-templates/bug.md)
+- [Implementation subtask](jira-templates/implementation-subtask.md)
+- [Review subtask](jira-templates/review-subtask.md)
 
-## Acceptance Criteria
+## Automation rules
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
-```
+- Use the matching template for the work item type.
+- Keep section titles unchanged so people and tools can parse them.
+- Default to the bug template only when reproducibility is being requested.
+- Use implementation subtasks when one story needs more than one branch or lane.
+- Use review subtasks when the work is read-only review or review-gate output.
+- Keep repository-specific commands, paths, and branch defaults in the target repository.
 
-### Story guidance
+## Repository adapters
 
-- Keep the statement short and clear.
-- Use one persona.
-- Describe one outcome.
-- Avoid implementation detail in the story sentence itself.
-- Make the story SMART:
-  - Specific
-  - Measurable
-  - Achievable
-  - Relevant
-  - Time-bound
+Put universal standards in this site. Put repo-specific details in the target repository.
 
-### Story example
-
-```markdown
-As a platform engineer, I want a reusable Jira work item format, so that work requests are consistent across docs and automation.
-
-## Acceptance Criteria
-
-- [ ] The work item template is documented in the site
-- [ ] The template includes explicit sections for the requested work item type
-- [ ] Codex CLI can follow the template without additional explanation
-- [ ] The template can be reused for future work items with the same structure
-```
-
-## Bug template
-
-Use this format for bugs:
-
-```markdown
-## Steps to Reproduce
-
-## Expected Results
-
-## Actual Results
-
-## Tooling Versions
-```
-
-### Bug guidance
-
-- `Steps to Reproduce` should be numbered and repeatable.
-- `Expected Results` should describe what should have happened.
-- `Actual Results` should describe what happened instead.
-- `Tooling Versions` should include the relevant versions involved in the failure.
-
-### Bug example
-
-```markdown
-## Steps to Reproduce
-
-1. Open the affected page.
-2. Build the site with `mkdocs build --strict`.
-3. Review the error output.
-
-## Expected Results
-
-The site builds successfully without warnings or errors.
-
-## Actual Results
-
-The build fails because of a broken link in a markdown page.
-
-## Tooling Versions
-
-- MkDocs
-- MkDocs Material
-- Python
-- Browser version, if relevant
-```
-
-## How to use this with Codex CLI and OpenSpec
-
-When you provide a work item key, use the matching section and keep the same heading order.
-
-### For an epic key or epic request
-
-- Fill in `Overview`
-- Fill in `Scope`
-- Fill in `Out of Scope`
-- Fill in `Success Metrics`
-- Fill in `Resources`
-
-### For a story key or story request
-
-- Write the description as:
-  - `As a [persona], I [want to], [so that]`
-- Add `Acceptance Criteria`
-- Keep the acceptance criteria measurable and testable
-- Make sure the story is SMART
-
-### For a bug key or bug request
-
-- Fill in:
-  - `Steps to Reproduce`
-  - `Expected Results`
-  - `Actual Results`
-  - `Tooling Versions`
-
-### Rule for automation
-
-- If the work item is an epic, story, or bug, use the corresponding template exactly.
-- If the key is ambiguous, default to the bug template only when reproducibility is being requested.
-- Keep section titles unchanged so they are easy for people and tools to parse.
+| Location | Belongs there |
+|----------|---------------|
+| This standards site | Work item fields, templates, lane rules, review output, PR expectations |
+| Repository adapter | Base branch, exact validation commands, local paths, package commands, tool versions, implementation conventions |
+| `AGENTS.md` | The minimum local instructions an agent needs when internet access is unavailable |
 
 ## Related pages
 
-- [Reporting an issue](reporting-a-issue.md)
 - [Contribution workflow](contribution-workflow.md)
+- [Agentic delivery](agentic-delivery.md)
+- [Agent lanes](agent-lanes.md)
+- [Review gates](review-gates.md)
 - [Pull request template](pull-request-template.md)
