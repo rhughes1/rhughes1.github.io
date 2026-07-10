@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/rhughes1/rhughes1.github.io/compare/v1.2.0...v1.3.0) (2026-07-10)
+
+
+### Features
+
+* Adding in agent templates and Jira templates ([050aeb6](https://github.com/rhughes1/rhughes1.github.io/commit/050aeb63bba872b746a2cd8e621fa51fc324eec9))
+
 ## [1.2.0](https://github.com/rhughes1/rhughes1.github.io/compare/v1.1.0...v1.2.0) (2026-06-25)
 
 
