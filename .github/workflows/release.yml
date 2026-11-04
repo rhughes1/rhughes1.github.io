@@ -29,7 +29,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           environment: production
       - name: Release
-        uses: cycjimmy/semantic-release-action@v6
+        uses: cycjimmy/semantic-release-action@v8
         with:
           semantic_version: 18.0.0
           extra_plugins: |
